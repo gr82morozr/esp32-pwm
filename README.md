@@ -16,7 +16,7 @@ Usage:
 Sample Code:
 
 ```
-#include <ESP32PWM.h>`
+#include <ESP32PWM.h>
 ESP32PWM pwm =  ESP32PWM(13);
 // or 
 ESP32PWM pwm =  ESP32PWM(13,1,40000, 10, 0.5);
