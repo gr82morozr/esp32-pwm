@@ -8,6 +8,7 @@
 #define _DEFAULT_DUTYCYCLE    0.0
 
 
+
 /*
   ESP32 built in PWM, total 16 channels, can be attached to most digital pins.
   Max frequency  = 40MHz (resolution = 1) 
@@ -48,28 +49,36 @@ class ESP32PWM {
     // simple constructor - all default values
     ESP32PWM(int pin);
 
+    // advanced constructor - some costomized values
+    ESP32PWM(int pin, long freq);
+
     // advanced constructor - all costomized values
     ESP32PWM(int pin, int channel, long freq, int resolution, float dutycycle);
 
     // init pwm    
     void init();
 
+    void set_freq(long freq);
+
+    void set_resolution(float resolution);
+
     // run pwm with given dutycycle    
     void run(float dutycycle);
-    
+   
+
+
     // static varible to keep the channels in use
-    static int channel;
+    static int channel_in_use;
 
     // get next free channel, 0 ~ 15
     static int get_next_channel();
    
   private:
-    long pwm_freq       ;
-    int pwm_pin         ;
-    int pwm_channel     ;
-    int pwm_resolution  ;
-    float pwm_dutycycle ;
+    long freq       ;
+    int pin         ;
+    int channel     ;
+    int resolution  ;
+    float dutycycle ;
 
     
 };
-

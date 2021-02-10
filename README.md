@@ -13,7 +13,7 @@ Usage:
 
 `ESP32PWM pwm =  ESP32PWM(int pin, int channel, long freq, int resolution, float dutycycle);`
 
-Sample Code:
+Sample Code for PWM:
 
 ```
 #include <ESP32PWM.h>
@@ -28,5 +28,32 @@ void setup() {
 
 void loop() {
   delay(1000);
+}
+```
+Sample Code for Beeper:
+
+```
+#include <ESP32PWM.h>
+Beeper buz15 = Beeper(15);
+
+
+void setup() {
+  buz15.init();
+}
+
+void loop() {
+  delay(1000);
+  buz15.tone(1000,0.1);
+  buz15.notone();
+  delay(2000);
+  buz15.tone_success();
+  delay(2000);
+  buz15.tone_warning();
+  delay(2000);
+  buz15.tone_error();
+  delay(2000);
+  buz15.tone_tick();
+  delay(2000);
+  buz15.tone_beep();
 }
 ```
