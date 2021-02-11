@@ -1,6 +1,6 @@
 #pragma once
 #include <Arduino.h>
-#include "ESP32PWM.h"
+#include <PWM/ESP32PWM.h>
 
 #define _TONE_DUTYCYCLE       0.5
 

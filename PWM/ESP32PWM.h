@@ -1,6 +1,6 @@
 #pragma once
 
-#define _ESP32PWM_DEBUG        1
+#define _ESP32PWM_DEBUG       0
 #define _MAX_RESOUTION        10
 #define _MAX_FREQUENCY        40000000
 #define _DEFAULT_RESOUTION    10
