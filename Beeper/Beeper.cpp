@@ -1,4 +1,4 @@
-#include "Beeper/Beeper.h"
+#include "Beeper.h"
 
 /* 
  *==================================================
@@ -13,25 +13,24 @@
 Beeper::Beeper(int pin) {
   this->pin = pin;
   this->pwm = new ESP32PWM(this->pin);
-  
 };
 
 void Beeper::init() {
   this->pwm->init();
 };
 
-void Beeper::tone(long freq, float duration) {
+void Beeper::tone(long freq, float duration_sec) {
   this->pwm->set_freq(freq);
   this->pwm->init();
   this->pwm->run(_TONE_DUTYCYCLE);
-  delay((int) (duration * 1000));
+  delay((int) (duration_sec * 1000));
   this->notone();
 };
 
 void Beeper::tone_error() {
-  this->tone(1800, 0.1); delay(10);
-  this->tone(1800, 0.1); delay(10);
-  this->tone(1800, 0.1);
+  for (int i=6000; i>=2000; i -=200) {
+    this->tone(i, 0.01);
+  };
   this->notone();
 };
 
@@ -42,9 +41,15 @@ void Beeper::tone_warning() {
 };
 
 void Beeper::tone_success() {
-  for (int i=5000; i<=9000; i +=200) {
+  for (int i=2000; i<=6000; i +=200) {
     this->tone(i, 0.01);
   };
+  this->notone();
+};
+
+void Beeper::tone_ready() {
+  this->tone(1800, 0.2);
+  this->tone(1800, 0.3);
   this->notone();
 };
 

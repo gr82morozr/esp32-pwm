@@ -1,11 +1,11 @@
 #pragma once
+#include <Arduino.h>
 
-#define _ESP32PWM_DEBUG       0
-#define _MAX_RESOUTION        10
-#define _MAX_FREQUENCY        40000000
-#define _DEFAULT_RESOUTION    10
-#define _DEFAULT_FREQUENCY    10000
-#define _DEFAULT_DUTYCYCLE    0.0
+
+#define _ESP32PWM_DEBUG               0
+#define _DEFAULT_RESOUTION_BITS       10
+#define _DEFAULT_FREQUENCY            10000
+#define _DEFAULT_DUTYCYCLE            0.0
 
 
 
@@ -52,33 +52,34 @@ class ESP32PWM {
     // advanced constructor - some costomized values
     ESP32PWM(int pin, long freq);
 
+    // advanced constructor - some costomized values
+    ESP32PWM(int pin, long freq, float dutycycle);
+
     // advanced constructor - all costomized values
-    ESP32PWM(int pin, int channel, long freq, int resolution, float dutycycle);
+    ESP32PWM(int pin, int channel, long freq, int resolution_bits, float dutycycle);
 
     // init pwm    
     void init();
 
+    // set freq   
     void set_freq(long freq);
 
-    void set_resolution(float resolution);
+    // set resolution_bits
+    void set_resolution_bits(int resolution);
 
     // run pwm with given dutycycle    
     void run(float dutycycle);
    
-
-
-    // static varible to keep the channels in use
-    static int channel_in_use;
-
-    // get next free channel, 0 ~ 15
-    static int get_next_channel();
    
   private:
-    long freq       ;
-    int pin         ;
-    int channel     ;
-    int resolution  ;
-    float dutycycle ;
+    long        freq              ;
+    int         pin               ;
+    int         channel           ;
+    int         resolution_bits   ;
+    float       dutycycle         ;
+    static int  channel_in_use    ;
 
-    
+    // get next free channel, 0 ~ 15
+    static int  get_next_channel();
+    void        debug();
 };
