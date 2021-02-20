@@ -30,7 +30,17 @@ ESP32PWM::ESP32PWM(int pin, long freq) {
   this->freq              = freq;
   this->resolution_bits   = _DEFAULT_RESOUTION_BITS;
   this->dutycycle         = _DEFAULT_DUTYCYCLE;
-}
+};
+
+
+ESP32PWM::ESP32PWM(int pin, long freq, int resolution_bits, float dutycycle) {
+  this->channel          = ESP32PWM::get_next_channel();
+  this->pin              = pin;
+  this->freq             = freq;
+  this->resolution_bits  = resolution_bits;
+  this->dutycycle        = dutycycle;  
+};
+
 
 ESP32PWM::ESP32PWM(int pin, int channel, long freq, int resolution_bits, float dutycycle) {
    this->channel          = channel;
@@ -38,7 +48,7 @@ ESP32PWM::ESP32PWM(int pin, int channel, long freq, int resolution_bits, float d
    this->freq             = freq;
    this->resolution_bits  = resolution_bits;
    this->dutycycle        = dutycycle;
-}
+};
 
 
 void ESP32PWM::init(void) {

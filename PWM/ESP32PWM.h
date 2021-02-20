@@ -55,6 +55,9 @@ class ESP32PWM {
     // advanced constructor - some costomized values
     ESP32PWM(int pin, long freq, float dutycycle);
 
+    // advanced constructor - some costomized values
+    ESP32PWM(int pin, long freq, int resolution_bits, float dutycycle);
+
     // advanced constructor - all costomized values
     ESP32PWM(int pin, int channel, long freq, int resolution_bits, float dutycycle);
 
