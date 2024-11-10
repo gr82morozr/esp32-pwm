@@ -32,6 +32,13 @@ ESP32PWM::ESP32PWM(int pin, long freq) {
   this->dutycycle         = _DEFAULT_DUTYCYCLE;
 };
 
+ESP32PWM::ESP32PWM(int pin, long freq, float dutycycle) {
+  this->pin               = pin;
+  this->channel           = ESP32PWM::get_next_channel();
+  this->freq              = freq;
+  this->resolution_bits   = _DEFAULT_RESOUTION_BITS;
+  this->dutycycle         = dutycycle;
+};
 
 ESP32PWM::ESP32PWM(int pin, long freq, int resolution_bits, float dutycycle) {
   this->channel          = ESP32PWM::get_next_channel();
@@ -59,7 +66,9 @@ void ESP32PWM::init(void) {
 
 void ESP32PWM::set_freq(long freq) {
   this->freq = freq;
+  ledcSetup(this->channel, this->freq, this->resolution_bits);
 };
+
 
 void ESP32PWM::set_resolution_bits(int resolution_bits) {
   this->resolution_bits = resolution_bits;
@@ -70,6 +79,10 @@ void ESP32PWM::run(float dutycycle) {
   this->dutycycle = dutycycle;
   ledcWrite(this->channel, (int) (pow(2,this->resolution_bits) *  this->dutycycle)) ;   
 };
+
+int ESP32PWM::get_channel(void) {
+  return this->channel;
+}
 
 
 int ESP32PWM::get_next_channel() {

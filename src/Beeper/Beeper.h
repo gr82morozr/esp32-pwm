@@ -13,6 +13,7 @@
  * ================================================== 
  */
 
+#include "Common/Common.h"
 
 #define _TONE_DUTYCYCLE       0.5
 
@@ -45,7 +46,10 @@ class Beeper {
     // stop the tone    
     void notone();
 
+    int get_channel(void);
+
   private:
+    bool pwm_init = false;
     int pin ;
     long freq;
     ESP32PWM *pwm;

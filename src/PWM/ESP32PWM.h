@@ -5,7 +5,7 @@
 #define _ESP32PWM_DEBUG               0
 #define _DEFAULT_RESOUTION_BITS       10
 #define _DEFAULT_FREQUENCY            10000
-#define _DEFAULT_DUTYCYCLE            0.0
+#define _DEFAULT_DUTYCYCLE            0.1
 
 
 
@@ -73,6 +73,8 @@ class ESP32PWM {
     // run pwm with given dutycycle    
     void run(float dutycycle);
    
+    // 
+    int get_channel(void);
    
   private:
     long        freq              ;

@@ -20,10 +20,12 @@ void Beeper::init() {
 };
 
 void Beeper::tone(long freq, float duration_sec) {
+  if (this->pwm_init == false) {
+    this->pwm->init();
+  }
   this->pwm->set_freq(freq);
-  this->pwm->init();
   this->pwm->run(_TONE_DUTYCYCLE);
-  delay((int) (duration_sec * 1000));
+  DELAY((int) (duration_sec * 1000));
   this->notone();
 };
 
@@ -64,7 +66,12 @@ void Beeper::tone_beep() {
 };
 
 void Beeper::notone() {
-  this->pwm->run(_DEFAULT_DUTYCYCLE);
+  this->pwm->run(0);
+}
+
+
+int Beeper::get_channel(void) {
+  return this->pwm->get_channel();
 }
 
 
